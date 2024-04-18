@@ -8,8 +8,5 @@ urlpatterns = [
     path("videos/delete/<int:pk>/", views.VideoDelete.as_view(), name="video-delete"),
     path("videos/update/<int:pk>/", views.UpdateVideoTitleView.as_view(), name="video-title-update"),
     path("videos/search/<str:search_term>/",views.VideoSearchAPIView.as_view(),name="search-video-list"),
-
-    path("truncate/", views.TruncateDatabase.as_view(), name="truncate-db"),
     path("videos/stream/", views.VideoStreamAPIView.as_view(), name="video-stream")
-
 ] 

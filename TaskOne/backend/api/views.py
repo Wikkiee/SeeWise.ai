@@ -103,16 +103,6 @@ class VideoSearchAPIView(generics.ListAPIView):
         return Response(serializer.data)
 
 
-
-class TruncateDatabase(generics.GenericAPIView):
-    queryset = Video.objects.all()
-    serializer_class = VideoSerializer
-    permission_classes = [AllowAny]  
-
-    def delete(self, request, *args, **kwargs):
-        self.get_queryset().delete()
-        return Response({"message": "All videos have been deleted."}, status=status.HTTP_204_NO_CONTENT)
-
 class VideoCamera(object):
     def __init__(self):
         self.video = cv2.VideoCapture(0)
