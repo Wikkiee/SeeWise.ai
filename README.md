@@ -178,6 +178,49 @@ python manage.py test
 
 This command will execute the tests defined in the project and display the test results.
 
+# Task Two API Endpoints
+
+The following endpoints are available for Task Two of the project:
+
+**Base URL:** `http://localhost:8000`
+
+## Endpoints
+
+### Machines
+
+- **List/Create Machines:**
+  - URL: `/api/machines/`
+  - Method: `GET` (List), `POST` (Create)
+  - View: `MachineListCreateView`
+  - Name: `machine-list`
+
+- **Retrieve/Update/Delete Machine:**
+  - URL: `/api/machines/<int:pk>/`
+  - Method: `GET` (Retrieve), `PUT` (Update), `DELETE` (Delete)
+  - View: `MachineDetailView`
+  - Name: `machine-detail`
+
+### Production Logs
+
+- **List/Create Production Logs:**
+  - URL: `/api/production_logs/`
+  - Method: `GET` (List), `POST` (Create)
+  - View: `ProductionLogListCreateView`
+  - Name: `production-log-list`
+
+- **Retrieve/Update/Delete Production Log:**
+  - URL: `/api/production_logs/<int:pk>/`
+  - Method: `GET` (Retrieve), `PUT` (Update), `DELETE` (Delete)
+  - View: `ProductionLogDetailView`
+  - Name: `production-log-detail`
+
+## Additional Notes
+
+- Replace `<int:pk>` with the specific ID of the machine or production log when making requests for individual resources.
+- Use appropriate HTTP methods (`GET`, `POST`, `PUT`, `DELETE`) based on the desired operation.
+- Ensure that you have configured the backend environment and have the Django development server running to access these endpoints.
+
+
 
 
 
