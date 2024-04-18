@@ -1,0 +1,40 @@
+div, nav{
+    margin: 0;
+
+}
+
+div nav ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 20px 80px;
+    background-color: white;
+
+    margin-top: 0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+div nav ul li div input{
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid rgb(169, 169, 169);
+    width: 30rem;
+    margin-left: 60px;
+}
+div nav ul li strong{
+    color: rgb(85, 85, 85);
+
+}
+
+div nav ul li div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div nav ul li div img{
+    width:20px;
+    height: 20px;
+    margin-right: 5px;
+}
