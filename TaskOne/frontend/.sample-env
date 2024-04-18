@@ -1,0 +1,8 @@
+#check - https://firebase.google.com/docs/web/setup?hl=en&authuser=0
+VITE_API_URL="http://localhost:8000"
+VITE_FIREBASE_APIKEY="firebase API key"
+VITE_FIREBASE_AUTHDOMAIN="firebase authdomain"
+VITE_FIREBASE_PROJECTID="firebase project id"
+VITE_FIREBASE_STORAGEBUCKT="firebase storage bucket url"
+VITE_FIREBASE_MESSAGINGSENDID="firebase messageingid"
+VITE_FIREBASE_APPID="firebase app id"

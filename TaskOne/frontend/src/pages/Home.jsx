@@ -46,7 +46,11 @@ function Home() {
                 return (
                   <Link to={`/videos/${video.bucket_id}`} key={index}>
                     <div className=" w-fit rounded-md bg-red border">
-                      <div className="w-[440px] h-[260px] bg-[url('https://www.datapro.in/uploads/c2fcd84408955736c701e1e81ca05577.png')] bg-red-500 bg-cover" />
+                      <div
+                        className={`w-[440px] h-[260px] bg-red-500 bg-cover`}
+                      >
+                        <img className="h-full w-full" src={video.thumbnail} />
+                      </div>
                       <div className="px-5 py-5">
                         <h1 className="font-semibold ">{video.title}</h1>
                       </div>
@@ -63,11 +67,15 @@ function Home() {
             </h5>
             <div className="grid grid-cols-3 gap-10">
               {videoList.map((video, index) => {
-                console.log(video);
+                console.log(video.thumbnail);
                 return (
                   <Link to={`/videos/${video.bucket_id}`} key={index}>
                     <div className=" w-fit rounded-md bg-red border">
-                      <div className="w-[440px] h-[260px] bg-[url('https://www.datapro.in/uploads/c2fcd84408955736c701e1e81ca05577.png')] bg-red-500 bg-cover" />
+                      <div
+                        className={`w-[440px] h-[260px] bg-red-500 bg-cover`}
+                      >
+                        <img className="h-full w-full" src={video.thumbnail} />
+                      </div>
                       <div className="px-5 py-5">
                         <h1 className="font-semibold ">{video.title}</h1>
                       </div>

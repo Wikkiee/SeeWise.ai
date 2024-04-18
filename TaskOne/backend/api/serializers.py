@@ -17,5 +17,5 @@ class UserSerializer(serializers.ModelSerializer):
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
-        fields = ["id", "title", "url", "bucket_id","created_at", "author"]
+        fields = ["id", "title", "url", "thumbnail", "bucket_id","created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}

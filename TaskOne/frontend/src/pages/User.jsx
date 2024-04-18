@@ -13,6 +13,7 @@ import { Link } from "react-router-dom";
 function User() {
   const [title, setTitle] = useState("");
   const [videoUpload, setVideoUpload] = useState(null);
+  const [thumbnailUpload, setThumbnailUpload] = useState(null);
   const [videoList, setVideoList] = useState([]);
   const [editingTitleId, setEditingTitleId] = useState(null);
   const [newTitle, setNewTitle] = useState(null);
@@ -26,24 +27,31 @@ function User() {
     }
     const identifier = v4();
     const videoRef = ref(storage, `videos/${identifier}`);
+    const thumbnailRef = ref(storage, `images/${identifier}`);
     uploadBytes(videoRef, videoUpload).then((snapshots) => {
       getDownloadURL(snapshots.ref)
         .then((url) => {
-          console.log(url);
-          api
-            .post("/api/videos/retrive-and-upload/", {
-              title: title,
-              url: url,
-              bucket_id: identifier,
-            })
-            .then((response) => {
-              console.log(response);
-              setIsUploading(false);
-              setVideoList((prev) => [...prev, response.data]);
-            })
-            .catch((error) => {
-              console.log(error);
+          const videoUrl = url;
+          uploadBytes(thumbnailRef, thumbnailUpload).then((snapshots) => {
+            getDownloadURL(snapshots.ref).then((url) => {
+              const thumbnailUrl = url;
+              api
+                .post("/api/videos/retrive-and-upload/", {
+                  title: title,
+                  url: videoUrl,
+                  thumbnail: thumbnailUrl,
+                  bucket_id: identifier,
+                })
+                .then((response) => {
+                  console.log(response);
+                  setIsUploading(false);
+                  setVideoList((prev) => [...prev, response.data]);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             });
+          });
         })
         .catch((error) => {
           console.log(error);
@@ -57,9 +65,17 @@ function User() {
       .then((response) => {
         if (response.status == 204) {
           const videoRef = ref(storage, `videos/${bucket_id}`);
+          const thumbnailRef = ref(storage, `images/${bucket_id}`);
           deleteObject(videoRef)
             .then(() => {
-              console.log("File deleted successfully");
+              console.log("Video deleted successfully");
+            })
+            .catch((error) => {
+              console.error("Error deleting file:", error);
+            });
+          deleteObject(thumbnailRef)
+            .then(() => {
+              console.log("Thumbnail deleted successfully");
             })
             .catch((error) => {
               console.error("Error deleting file:", error);
@@ -120,9 +136,7 @@ function User() {
                 setTitle(event.target.value);
               }}
             />
-            <label className="" for="files">
-              Open a Video File
-            </label>
+            <label for="files">Open a Video File</label>
 
             <input
               id="files"
@@ -133,7 +147,16 @@ function User() {
                 setVideoUpload(event.target.files[0]);
               }}
             />
+            <label for="files">Select a thumbnail</label>
 
+            <input
+              type="file"
+              accept=".png, .jpeg, .jpg"
+              className="mb-5"
+              onChange={(event) => {
+                setThumbnailUpload(event.target.files[0]);
+              }}
+            />
             <button
               className="bg-black text-white px-10 py-2 rounded"
               onClick={uploadVideo}
